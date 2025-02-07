@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff0f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #FF1493;
+        }
+
+        .corazon {
+            width: 120px;
+            height: 120px;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/800px-Heart_coraz%C3%B3n.svg.png");
+            background-size: cover;
+            animation: latido 1s infinite alternate;
+        }
+
+        @keyframes latido {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px; /* Separa los botones */
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #si {
+            background-color: #32CD32;
+        }
+
+        #no {
+            background-color: red;
+            position: relative;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #FF1493;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .corazon-flotante {
+            position: absolute;
+            font-size: 2em;
+            animation: flotar 2s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        #imagen {
+            display: none;
+            margin-top: 20px;
+            max-width: 90%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="corazon"></div>
+    <h1>¿Quieres ser mi San Valentín, Stacy Espinal? ❤️</h1>
+
+    <div class="botones">
+        <button id="si">Sí</button>
+        <button id="no">No</button>
+    </div>
+
+    <div id="mensaje"></div>
+    <img id="imagen" src="https://drive.google.com/uc?export=view&id=1O2n140arxF6non3sLgVifnQ22OaE485b" alt="Nosotros">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const botonNo = document.getElementById('no');
+            const botonSi = document.getElementById('si');
+            const mensaje = document.getElementById('mensaje');
+            const imagen = document.getElementById('imagen');
+
+            botonNo.addEventListener('mouseover', () => {
+                const maxX = window.innerWidth - botonNo.offsetWidth - 50;
+                const maxY = window.innerHeight - botonNo.offsetHeight - 50;
+
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                botonNo.style.position = "absolute";
+                botonNo.style.left = `${randomX}px`;
+                botonNo.style.top = `${randomY}px`;
+            });
+
+            botonSi.addEventListener('click', () => {
+                mensaje.textContent = "¡Siiiiiiii! ¡Me haces la persona más feliz del mundo!";
+                mensaje.style.display = 'block';
+                mensaje.style.opacity = '1';
+                imagen.style.display = 'block';
+
+                for (let i = 0; i < 10; i++) {
+                    let heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.classList.add('corazon-flotante');
+                    heart.style.left = `${Math.random() * window.innerWidth}px`;
+                    heart.style.top = `${window.innerHeight}px`;
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 2000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
